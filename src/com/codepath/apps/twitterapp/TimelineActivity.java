@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -22,13 +23,31 @@ public class TimelineActivity extends Activity {
 	TweetAdapter adapter;
 	ListView lvTweets;
 	ArrayList<Tweet> tweets;
+	Tweet lastVisibleTweet;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_timeline);
 		this.setTitle("Twitter Client");
 		this.setTitleColor(Color.BLUE);
+		setViews();
 		getTweets();
+	}
+	
+	public void setViews() {
+		lvTweets = (ListView) findViewById(R.id.lvTweets);
+        lvTweets.setOnScrollListener(new EndlessScrollListener() {
+        	@Override
+        	public void onLoadMore(int page, int totalItemsCount) {
+        		if(lastVisibleTweet!=null) {
+        			Log.d("scroll","get more data from: " + String.valueOf(lastVisibleTweet.getId()));
+        			getOlderTweets(lastVisibleTweet.getId());
+        		}
+        		else
+        			Log.d("scroll","something went wrong");
+        	}
+        });
 	}
 
 	public void getTweets() {
@@ -36,11 +55,22 @@ public class TimelineActivity extends Activity {
 			@Override
 			public void onSuccess(JSONArray JsonTweets) {
 				tweets = Tweet.fromJson(JsonTweets);
-				lvTweets = (ListView) findViewById(R.id.lvTweets);
 				adapter = new TweetAdapter(getBaseContext(), tweets);
 				lvTweets.setAdapter(adapter);
+				lastVisibleTweet = adapter.getItem(adapter.getCount()-1);
 			}
 		});
+	}
+	
+	public void getOlderTweets(long fromTweet) {
+		TwitterClientApp.getRestClient().getHomeTimeline(new JsonHttpResponseHandler() {
+			@Override
+			public void onSuccess(JSONArray JsonTweets) {
+				tweets = Tweet.fromJson(JsonTweets);
+				adapter.addAll(tweets);
+				lastVisibleTweet = adapter.getItem(adapter.getCount()-1);
+			}
+		}, fromTweet);
 	}
 	
 	@Override
