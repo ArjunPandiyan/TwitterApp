@@ -1,0 +1,52 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/createTweetActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".CreateTweetActivity" >
+
+    <EditText
+        android:id="@+id/etTweet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:hint="@string/et_tweet_hint"
+        android:inputType="textMultiLine"
+        android:lines="5" />
+
+    <TextView
+        android:id="@+id/tvLength"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/etTweet"
+        android:layout_below="@+id/etTweet"
+        android:text="0" />
+
+    <Button
+        android:id="@+id/bnOk"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/etTweet"
+        android:layout_below="@+id/etTweet"
+        android:onClick="onTweetOk"
+        android:text="@string/bnOk" />
+
+    <Button
+        android:id="@+id/bnCancel"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/bnOk"
+        android:layout_alignBottom="@+id/bnOk"
+        android:layout_toRightOf="@+id/bnOk"
+        android:onClick="onTweetCancel"
+        android:text="@string/bn_cancel" />
+
+</RelativeLayout>

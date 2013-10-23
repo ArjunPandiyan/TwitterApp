@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Rest Client Template</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_photos">Flickr Photos</string>
+    <string name="login_label">Log in</string>
+    <string name="title_activity_timeline">TimelineActivity</string>
+    <string name="title_activity_create_tweet">CreateTweetActivity</string>
+    <string name="et_tweet_hint">Compose tweet</string>
+    <string name="btn_send_hint">Tweet</string>
+    <string name="btn_compose">Add</string>
+    <string name="bnOk">Ok</string>
+    <string name="bn_cancel">Cancel</string>    
+
+</resources>
