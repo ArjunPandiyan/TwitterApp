@@ -12,6 +12,9 @@
     <string name="btn_send_hint">Tweet</string>
     <string name="btn_compose">Add</string>
     <string name="bnOk">Ok</string>
-    <string name="bn_cancel">Cancel</string>    
+    <string name="bn_cancel">Cancel</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="profile_upper_text">upper text</string>
+    <string name="profile_lower_text">lower text</string>
 
 </resources>

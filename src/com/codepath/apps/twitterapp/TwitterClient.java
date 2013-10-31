@@ -4,6 +4,7 @@ import org.scribe.builder.api.Api;
 import org.scribe.builder.api.TwitterApi;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.codepath.oauth.OAuthBaseClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -37,10 +38,34 @@ public class TwitterClient extends OAuthBaseClient {
     	String url = getApiUrl("statuses/home_timeline.json?count=25");
     	client.get(url, null, handler);
     }
-    
+    //gets twitter home timeline with max count
     public void getHomeTimeline(AsyncHttpResponseHandler handler, long fromTweet){
     	String url = getApiUrl("statuses/home_timeline.json?count=25&max_id=" + String.valueOf(fromTweet));
     	client.get(url, null, handler);
+    }
+    
+    //gets mentions
+    public void getMentionsTimeline(AsyncHttpResponseHandler handler){
+    	String url = getApiUrl("statuses/mentions_timeline.json?count=25");
+    	client.get(url, null, handler);
+    }
+    
+  //gets user tweets
+    public void getUserTimeline(AsyncHttpResponseHandler handler){
+    	String url = getApiUrl("statuses/user_timeline.json?count=25");
+    	client.get(url, null, handler);
+    }
+    
+  //gets user tweets
+    public void getUserTimeline(AsyncHttpResponseHandler handler, String name){
+    	String url;
+    	if(name.length()==0) 
+    		url = getApiUrl("statuses/user_timeline.json?count=25");
+    	else 
+    		url = getApiUrl("statuses/user_timeline.json?count=25&screen_name=" + name);
+    	Log.d("url",url);
+    	client.get(url, null, handler);
+    	
     }
     
     //API to post a tweet

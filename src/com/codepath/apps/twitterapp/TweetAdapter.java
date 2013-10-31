@@ -3,7 +3,9 @@ package com.codepath.apps.twitterapp;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +39,17 @@ public class TweetAdapter extends ArrayAdapter<Tweet>{
          Tweet tweet= getItem(position);
 
          ivProfile = (ImageView) view.findViewById(R.id.ivProfile);
-         ImageLoader.getInstance().displayImage(tweet.getUser().getProfileBackgroundImageUrl(), ivProfile);
+         ivProfile.setTag(tweet.getUser().getScreenName());
+         ivProfile.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+            	 Intent i = new Intent(getContext(), ProfileActivity.class);
+            	 i.putExtra("sname", v.getTag().toString() );
+            	 getContext().startActivity(i);
+             }
+        });
+         
+         ImageLoader.getInstance().displayImage(tweet.getUser().getProfileImageUrl(), ivProfile);
 
          tvName = (TextView) view.findViewById(R.id.tvName); 
          String formattedName = "<b>"+tweet.getUser().getName() +"</b>" + "<small><font color='#777777>@"+tweet.getUser().getScreenName()+"</font></small>";

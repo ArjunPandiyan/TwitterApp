@@ -66,16 +66,17 @@ public class CreateTweetActivity extends Activity {
 	public void onTweetOk(View v) {
 		String tweetString = etTweet.getText().toString();
         if(tweetString != null){
+        	if(tweetString.length()<=140) {
                 TwitterClientApp.getRestClient().postTweet(new JsonHttpResponseHandler(){
                         @Override
                         public void onSuccess(JSONObject jsonResult){
                                 Intent successIntent = getIntent();
                                 successIntent.putExtra("result", jsonResult.toString());
-                                setResult(RESULT_OK, successIntent);
+                                setResult(200, successIntent);
                                 finish();
                         }
                 }, tweetString);
-                
+        	}
         }
 	}
 
